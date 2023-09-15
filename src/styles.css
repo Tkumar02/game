@@ -1,2 +1,20 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+:root{
+    --primary-colour: rgb(170, 66, 135);
+    --secondary-colour: rgb(19, 12, 2);
+}
+
+.gradient-background {
+    background: linear-gradient(to bottom right, var(--primary-colour), var(--secondary-colour));
+}
+
+.btn-purple {
+    background-color: rgb(153, 69, 133);
+    box-shadow:  0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.btn-black {
+    background-color: black;
+    color: white;
+}

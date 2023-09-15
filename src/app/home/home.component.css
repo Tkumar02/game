@@ -1,0 +1,14 @@
+:host{
+    display: block;
+    background-image: url('/assets/stiles.jpg');
+    height: 100vh;
+}
+
+.title{
+    background: linear-gradient(to bottom right, black, blueviolet);
+    color: white;
+    margin: auto;
+    text-align: center;
+    width: auto;
+    opacity: 70%;
+}

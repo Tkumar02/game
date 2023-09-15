@@ -1,0 +1,24 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    width: 400px;
+    margin: auto;
+}
+
+
+input{
+    width: 5vw;
+    text-align: center;
+}
+
+  
+  /* Optional: Center the grid on the screen */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    margin: 0;
+}
