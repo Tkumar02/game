@@ -1,11 +1,11 @@
 <div class="container">
     <div class="main-area">
         <div class="grid-container">
-            <div class="box"><input [(ngModel)]="inputValues[0]" #box1 id="1" (keyup)="moveBox(box1,$event.code)" type="text" maxlength="1"></div>
-            <div class="box"><input [(ngModel)]="inputValues[1]" #box2 id="2" (keyup)="moveBox(box2,$event.code)" type="text" maxlength="1"></div>
-            <div class="box"><input [(ngModel)]="inputValues[2]" #box3 id="3" (keyup)="moveBox(box3,$event.code)" type="text" maxlength="1"></div>
-            <div class="box"><input [(ngModel)]="inputValues[3]" #box4 id="4" (keyup)="moveBox(box4,$event.code)" type="text" maxlength="1"></div>
-            <div class="box"><input [(ngModel)]="inputValues[4]" #box5 id="5" (keyup)="moveBox(box5,$event.code)" type="text" maxlength="1"></div>
+            <div class="box"><input [(ngModel)]="inputValues[0]" #box1 id="1" (keyup)="moveBox(box1,$event.code)" type="text" maxlength="1" [style.background-color] = 'backgroundColour[0]'></div>
+            <div class="box"><input [(ngModel)]="inputValues[1]" #box2 id="2" (keyup)="moveBox(box2,$event.code)" type="text" maxlength="1" [style.background-color] = 'backgroundColour[1]'></div>
+            <div class="box"><input [(ngModel)]="inputValues[2]" #box3 id="3" (keyup)="moveBox(box3,$event.code)" type="text" maxlength="1" [style.background-color] = 'backgroundColour[2]'></div>
+            <div class="box"><input [(ngModel)]="inputValues[3]" #box4 id="4" (keyup)="moveBox(box4,$event.code)" type="text" maxlength="1" [style.background-color] = 'backgroundColour[3]'></div>
+            <div class="box"><input [(ngModel)]="inputValues[4]" #box5 id="5" (keyup)="moveBox(box5,$event.code)" type="text" maxlength="1" [style.background-color] = 'backgroundColour[4]'></div>
             <button (click)="onSubmit()">Submit</button>
             <div class="box"><input #box6 id="6" (keyup)="moveBox(box6, $event.code)" type="text" maxlength="1"></div>
             <div class="box"><input #box7 id="7" (keyup)="moveBox(box7,$event.code)" type="text" maxlength="1"></div>
