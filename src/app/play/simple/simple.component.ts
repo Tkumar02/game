@@ -262,10 +262,10 @@ export class SimpleComponent {
 
   checkWord(box:string, modelboxes:any){
     this.newArray = [...modelboxes]
-    this.finalWord = modelboxes.join('')
+    this.finalWord = modelboxes.join('').toLowerCase()
     for(let i=0;i<5;i++){
       const elementGreen = document.getElementById(i.toString()+box) as HTMLInputElement;
-      if(this.newArray[i]==this.wordArray[i]){
+      if(this.newArray[i].toLowerCase()==this.wordArray[i].toLowerCase()){
         elementGreen.style.backgroundColor = 'green';
         this.wordArray[i]='xx';
         this.newArray[i]='xx';
@@ -273,7 +273,7 @@ export class SimpleComponent {
     }
     for(let i=0;i<5;i++){
       const elementYellow = document.getElementById(i.toString()+box) as HTMLInputElement;
-      if(this.wordArray.includes(elementYellow.value)){
+      if(this.wordArray.includes(elementYellow.value.toLowerCase())){
         elementYellow.style.backgroundColor = 'yellow';
       }
     }
