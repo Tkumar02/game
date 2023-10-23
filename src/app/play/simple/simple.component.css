@@ -1,11 +1,9 @@
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
     gap: 1px;
     width: 400px;
-    margin: auto;
+    margin-left: auto;
+    display: flex;
 }
-
 
 input{
     width: 5vw;
