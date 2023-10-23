@@ -7,7 +7,115 @@ import { Form } from '@angular/forms';
   styleUrls: ['./simple.component.css']
 })
 export class SimpleComponent {
-  chosenWord: string =  'guess';
+  fiveLetterWords = [
+    'apple',
+    'beach',
+    'candy',
+    'dream',
+    'eagle',
+    'fable',
+    'grape',
+    'honey',
+    'ivory',
+    'jolly',
+    'kite',
+    'lemon',
+    'mango',
+    'night',
+    'ocean',
+    'piano',
+    'queen',
+    'rider',
+    'sugar',
+    'table',
+    'umbra',
+    'vivid',
+    'water',
+    'xenon',
+    'yacht',
+    'zebra',
+    'adore',
+    'baker',
+    'cease',
+    'dance',
+    'evoke',
+    'flame',
+    'giant',
+    'happy',
+    'inbox',
+    'juice',
+    'keeps',
+    'lucky',
+    'magic',
+    'novel',
+    'oasis',
+    'pouch',
+    'quilt',
+    'rover',
+    'sweep',
+    'trail',
+    'unity',
+    'vivid',
+    'waste',
+    'xerox',
+    'yield',
+    'zesty',
+    'agile',
+    'buddy',
+    'crisp',
+    'dwell',
+    'eager',
+    'frank',
+    'glory',
+    'happy',
+    'input',
+    'juicy',
+    'kudos',
+    'liver',
+    'merry',
+    'noble',
+    'ocean',
+    'peace',
+    'quest',
+    'robin',
+    'sweet',
+    'truce',
+    'urban',
+    'vocal',
+    'witty',
+    'xenon',
+    'young',
+    'zebra',
+    'altar',
+    'blend',
+    'cheer',
+    'daisy',
+    'elite',
+    'flair',
+    'green',
+    'happy',
+    'irish',
+    'jewel',
+    'karma',
+    'lunar',
+    'music',
+    'noble',
+    'oasis',
+    'peach',
+    'quota',
+    'rider',
+    'sunny',
+    'table',
+    'ultra',
+    'vivid',
+    'whale',
+    'xerox',
+    'yield',
+    'zebra'
+  ];
+  
+  
+  chosenWord: string =  '';
   finalWord: string = '';
   wordArray: Array<string> = [];
   guessedWord: string = '';
@@ -43,6 +151,9 @@ export class SimpleComponent {
   constructor(){}
 
   ngOnInit(): void{
+
+    const randomWord=Math.floor(Math.random() * this.fiveLetterWords.length);
+    this.chosenWord = this.fiveLetterWords[randomWord]
     
   }
 
@@ -158,17 +269,12 @@ export class SimpleComponent {
         elementGreen.style.backgroundColor = 'green';
         this.wordArray[i]='xx';
         this.newArray[i]='xx';
-        console.log(this.wordArray,'green')
-      }
-      else{
-        console.log(i)
       }
     }
     for(let i=0;i<5;i++){
       const elementYellow = document.getElementById(i.toString()+box) as HTMLInputElement;
       if(this.wordArray.includes(elementYellow.value)){
         elementYellow.style.backgroundColor = 'yellow';
-        console.log('yellow',elementYellow.value )
       }
     }
     for(let i=0;i<5;i++){
@@ -206,6 +312,5 @@ export class SimpleComponent {
   }
   
   onSubmitForm(f:any){
-    console.log('HELLOO')
   }
 }
