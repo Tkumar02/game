@@ -6,6 +6,8 @@ import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat/';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 
+import { HttpClientModule } from '@angular/common/http'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -32,6 +34,7 @@ import { SimpleComponent } from './play/simple/simple.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     //provideFirebaseApp(() => initializeApp(environment.firebase)), provideFirestore(() => getFirestore()),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

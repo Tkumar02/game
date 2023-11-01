@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Form } from '@angular/forms';
+import { CheckWordService } from 'src/app/services/check-word.service';
 
 @Component({
   selector: 'app-simple',
@@ -118,6 +119,7 @@ export class SimpleComponent {
   chosenWord: string =  '';
   finalWord: string = '';
   wordArray: Array<string> = [];
+  finalArray: Array<string> = [];
   guessedWord: string = '';
   newArray: Array<string> = [];
 
@@ -127,6 +129,8 @@ export class SimpleComponent {
   check: boolean = false;
   failed: boolean = false;
   submitted: boolean = false;
+  invalidWord: boolean = false;
+  wrongLetters: Array<any> = []
 
   modelBoxes1: string[] = ['','','','',''];
   modelBoxes2: string[] = ['','','','',''];
@@ -148,13 +152,13 @@ export class SimpleComponent {
   completed:boolean = false;
   
 
-  constructor(){}
+  constructor(private checkValid: CheckWordService, private http:HttpClient){}
 
   ngOnInit(): void{
 
     const randomWord=Math.floor(Math.random() * this.fiveLetterWords.length);
     this.chosenWord = this.fiveLetterWords[randomWord]
-    
+    this.finalArray = [...this.chosenWord]
   }
 
   moveBox(event:Event, nextEvent:number, attempt:number){
@@ -179,90 +183,147 @@ export class SimpleComponent {
     }
     //thisBox is the current box user is in
     const thisBox = event.target as HTMLInputElement
+    thisBox.value = thisBox.value.toUpperCase()
     //using id of next box to select that element
     const nextBox = document.getElementById(nextEvent.toString() + this.box) as HTMLInputElement
         
     if(/^[a-zA-Z]+$/.test(thisBox.value) && parseInt(thisBox.id)<4){
       nextBox.focus()
-      //console.log(thisBox.id)
     } 
   }
 
-  onSubmit(num:number){
+  async onSubmit(num:number){
     this.check=false;
   switch(num){
       case 1:
         this.wordArray = [...this.chosenWord]
         this.box='one'
-        this.checkWord(this.box, this.modelBoxes1)
-        this.attempt1 = true;
-        this.button1 = true;        
+        try
+        {await this.checkWord(this.box, this.modelBoxes1)
+          if(!this.invalidWord){
+            console.log('valid word')
+            this.attempt1 = true;
+            this.button1 = true;  
+          }   
+          else{
+            console.log('invalid word')
+            this.modelBoxes1 = ['','','','','']
+          }   
+        }
+        catch(error){
+          console.log(error)
+        }
         break;
       case 2:
         this.wordArray = [...this.chosenWord]
         this.newArray=[]
         this.finalWord=''
         this.box='two'
-        this.checkWord(this.box, this.modelBoxes2)
-        this.attempt2=true
-        this.button2 = true
+        // this.checkWord(this.box, this.modelBoxes2)
+        // this.attempt2=true
+        // this.button2 = true
+        try
+        {await this.checkWord(this.box, this.modelBoxes2)
+          if(!this.invalidWord){
+            console.log('valid word')
+            this.attempt2 = true;
+            this.button2 = true;  
+          }   
+          else{
+            console.log('invalid word')
+            this.modelBoxes2 = ['','','','','']
+          }   
+        }
+        catch(error){
+          console.log(error)
+        }
         break;
       case 3:
         this.wordArray = [...this.chosenWord]
         this.newArray=[]
         this.finalWord=''
         this.box='three'
-        this.checkWord(this.box, this.modelBoxes3)
-        this.attempt3=true
-        this.button3=true
+        try
+        {await this.checkWord(this.box, this.modelBoxes3)
+          if(!this.invalidWord){
+            console.log('valid word')
+            this.attempt3 = true;
+            this.button3 = true;  
+          }   
+          else{
+            console.log('invalid word')
+            this.modelBoxes3 = ['','','','','']
+          }   
+        }
+        catch(error){
+          console.log(error)
+        }
         break;
       case 4:
         this.wordArray = [...this.chosenWord]
         this.newArray=[]
         this.finalWord=''
         this.box='four'
-        this.checkWord(this.box, this.modelBoxes4)
-        this.attempt4=true
-        this.button4=true
+        try
+        {await this.checkWord(this.box, this.modelBoxes4)
+          if(!this.invalidWord){
+            console.log('valid word')
+            this.attempt4 = true;
+            this.button4 = true;  
+          }   
+          else{
+            console.log('invalid word')
+            this.modelBoxes4 = ['','','','','']
+          }   
+        }
+        catch(error){
+          console.log(error)
+        }
         break;
       case 5:
         this.wordArray = [...this.chosenWord]
         this.newArray=[]
         this.finalWord=''
         this.box='five'
-        this.checkWord(this.box, this.modelBoxes5)
-        this.submitted= true
+        try
+        {await this.checkWord(this.box, this.modelBoxes5)
+          if(!this.invalidWord){
+            console.log('valid word')
+            this.button5 = true;  
+          }   
+          else{
+            console.log('invalid word')
+            this.modelBoxes5 = ['','','','','']
+          }   
+        }
+        catch(error){
+          console.log(error)
+        }
         break;
     }
   }
 
-  // checkWord(box:string){
-  //   for(let i=0;i<5;i++){
-  //     const element = document.getElementById(i.toString()+box) as HTMLInputElement;
-  //     this.newArray.push(element.value);
-  //     this.finalWord=this.finalWord+element.value
-  //     if(this.newArray[i]==this.wordArray[i]){
-  //       element.style.backgroundColor = 'green';
-  //       this.wordArray[i]='xx';
-  //       console.log(this.wordArray,'green')
-  //     }
-  //     else if(this.wordArray.includes(element.value)){
-  //       element.style.backgroundColor = 'yellow';
-  //       console.log(this.wordArray, 'yellow')
-  //     }
-  //     else{
-  //       element.style.backgroundColor = 'red';
-  //     }
-  //   }
-  //   if(this.finalWord==this.chosenWord){
-  //     this.completed=true
-  //     alert('Successfully completed!')
-  //   }
-  // }
-
-  checkWord(box:string, modelboxes:any){
+  async checkWord(box:string, modelboxes:any){
     this.newArray = [...modelboxes]
     this.finalWord = modelboxes.join('').toLowerCase()
+    try{
+      await this.checkIfValid(this.finalWord)
+      console.log(this.invalidWord,'first time')
+    }
+    catch(error:any){
+      if (error.status === 404){
+        console.log('error!!!')
+      }
+    }
+
+    if(this.invalidWord){
+      modelboxes = ['','','','','']
+      this.newArray = []
+      console.log(this.newArray)
+      alert('according to this weird dictionary im using this word does not exist')
+      return
+    }
+    
     for(let i=0;i<5;i++){
       const elementGreen = document.getElementById(i.toString()+box) as HTMLInputElement;
       if(this.newArray[i].toLowerCase()==this.wordArray[i].toLowerCase()){
@@ -273,23 +334,52 @@ export class SimpleComponent {
     }
     for(let i=0;i<5;i++){
       const elementYellow = document.getElementById(i.toString()+box) as HTMLInputElement;
-      if(this.wordArray.includes(elementYellow.value.toLowerCase())){
+      if(this.wordArray.includes(elementYellow.value.toLowerCase()) && elementYellow.style.backgroundColor!='green'){
         elementYellow.style.backgroundColor = 'yellow';
+        const yellowIndex = this.wordArray.indexOf(elementYellow.value.toLowerCase())
+        this.wordArray[yellowIndex]='xx';
       }
     }
     for(let i=0;i<5;i++){
       const elementRed = document.getElementById(i.toString()+box) as HTMLInputElement;
       if(elementRed.style.backgroundColor != 'green' && elementRed.style.backgroundColor!='yellow'){
         elementRed.style.backgroundColor = 'red';
+        this.wrongLetters.push(elementRed.value.toLowerCase())
       }
     }
-    
     if(this.finalWord==this.chosenWord){
       this.completed=true
       alert('Successfully completed!')
     }
   }
 
+  checkLetter(letter:string, event:Event){
+    const wrongBox = event.target as HTMLInputElement
+    if(this.wrongLetters.includes(letter) && !this.finalArray.includes(letter)){
+      wrongBox.style.color = 'grey';
+      console.log(this.wordArray)
+    }
+    else{
+      wrongBox.style.color = 'black'
+    }
+  }
+
+  async checkIfValid(word:string) { 
+    try{
+      await this.http.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`).toPromise()
+        this.invalidWord = false
+        console.log('valid wordcoming from checkIfValid function')
+    }
+    catch(error:any){
+      this.invalidWord = true
+      if(error.status===404){
+        console.log('here is an error from function!')
+      }
+    }  
+  }
+  
+
+ 
   onInput(i:number, n:number){
     switch(n){
       case 1:
@@ -306,7 +396,8 @@ export class SimpleComponent {
         break;
       case 5:
         this.check = this.modelBoxes5.every(box => box.trim() !== '');
-        this.failed=true;
+        if(!this.completed)
+          {this.failed=true;}
         break;
     }
   }
