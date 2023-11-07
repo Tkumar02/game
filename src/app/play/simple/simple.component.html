@@ -7,6 +7,7 @@
             [(ngModel)]="modelBoxes1[i]"
             required
             (input)="onInput(i,1)"
+            (keydown)="checkBack($event,i,'one')"
             >
         </div>
         <button type="submit"  [disabled]="!check || button1" (click)="onSubmit(1)">Submit</button>
@@ -19,6 +20,7 @@
             required
             (input)="onInput(i,2)"
             (input)="checkLetter(modelBoxes2[i],$event)"
+            (keydown)="checkBack($event,i,'two')"
             >
         </div>
         <button [disabled]="button2 || !check" (click)="onSubmit(2)">Submit</button>
@@ -30,7 +32,8 @@
             [(ngModel)]="modelBoxes3[i]"
             required
             (input)="onInput(i,3)"
-            (input)="checkLetter(modelBoxes3[i],$event)">
+            (input)="checkLetter(modelBoxes3[i],$event)"
+            (keydown)="checkBack($event,i,'three')">
         </div>
         <button [disabled]="button3 || !check" (click)="onSubmit(3)">Submit</button>
     </div>
@@ -41,7 +44,8 @@
             [(ngModel)]="modelBoxes4[i]"
             required
             (input)="onInput(i,4)"
-            (input)="checkLetter(modelBoxes4[i],$event)">
+            (input)="checkLetter(modelBoxes4[i],$event)"
+            (keydown)="checkBack($event,i,'four')">
         </div>
         <button [disabled]="button4 || !check" (click)="onSubmit(4)">Submit</button>
     </div>
@@ -52,7 +56,8 @@
             [(ngModel)]="modelBoxes5[i]"
             required
             (input)="onInput(i,5)"
-            (input)="checkLetter(modelBoxes5[i],$event)">
+            (input)="checkLetter(modelBoxes5[i],$event)"
+            (keydown)="checkBack($event,i,'five')">
         </div>
         <button [disabled]="button5||!check" (click)="onSubmit(5)">Submit</button>
     </div>

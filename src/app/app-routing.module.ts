@@ -7,7 +7,8 @@ import { SimpleComponent } from './play/simple/simple.component';
 const routes: Routes = [
   {path:'admin/create', component:CreateComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'play/simple', component:SimpleComponent}
+  {path: 'play/simple', component:SimpleComponent},
+  {path: '', component:HomeComponent}
 ];
 
 @NgModule({

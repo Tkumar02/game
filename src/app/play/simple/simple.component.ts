@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { CheckWordService } from 'src/app/services/check-word.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { fiveLetterWords } from 'src/assets/words';
 
 @Component({
   selector: 'app-simple',
@@ -8,113 +8,8 @@ import { CheckWordService } from 'src/app/services/check-word.service';
   styleUrls: ['./simple.component.css']
 })
 export class SimpleComponent {
-  fiveLetterWords = [
-    'apple',
-    'beach',
-    'candy',
-    'dream',
-    'eagle',
-    'fable',
-    'grape',
-    'honey',
-    'ivory',
-    'jolly',
-    'kite',
-    'lemon',
-    'mango',
-    'night',
-    'ocean',
-    'piano',
-    'queen',
-    'rider',
-    'sugar',
-    'table',
-    'umbra',
-    'vivid',
-    'water',
-    'xenon',
-    'yacht',
-    'zebra',
-    'adore',
-    'baker',
-    'cease',
-    'dance',
-    'evoke',
-    'flame',
-    'giant',
-    'happy',
-    'inbox',
-    'juice',
-    'keeps',
-    'lucky',
-    'magic',
-    'novel',
-    'oasis',
-    'pouch',
-    'quilt',
-    'rover',
-    'sweep',
-    'trail',
-    'unity',
-    'vivid',
-    'waste',
-    'xerox',
-    'yield',
-    'zesty',
-    'agile',
-    'buddy',
-    'crisp',
-    'dwell',
-    'eager',
-    'frank',
-    'glory',
-    'happy',
-    'input',
-    'juicy',
-    'kudos',
-    'liver',
-    'merry',
-    'noble',
-    'ocean',
-    'peace',
-    'quest',
-    'robin',
-    'sweet',
-    'truce',
-    'urban',
-    'vocal',
-    'witty',
-    'xenon',
-    'young',
-    'zebra',
-    'altar',
-    'blend',
-    'cheer',
-    'daisy',
-    'elite',
-    'flair',
-    'green',
-    'happy',
-    'irish',
-    'jewel',
-    'karma',
-    'lunar',
-    'music',
-    'noble',
-    'oasis',
-    'peach',
-    'quota',
-    'rider',
-    'sunny',
-    'table',
-    'ultra',
-    'vivid',
-    'whale',
-    'xerox',
-    'yield',
-    'zebra'
-  ];
-  
+
+  fiveLetterWords = fiveLetterWords
   
   chosenWord: string =  '';
   finalWord: string = '';
@@ -152,7 +47,7 @@ export class SimpleComponent {
   completed:boolean = false;
   
 
-  constructor(private checkValid: CheckWordService, private http:HttpClient){}
+  constructor(private http:HttpClient){}
 
   ngOnInit(): void{
 
@@ -186,10 +81,19 @@ export class SimpleComponent {
     thisBox.value = thisBox.value.toUpperCase()
     //using id of next box to select that element
     const nextBox = document.getElementById(nextEvent.toString() + this.box) as HTMLInputElement
-        
+            
     if(/^[a-zA-Z]+$/.test(thisBox.value) && parseInt(thisBox.id)<4){
       nextBox.focus()
     } 
+  }
+  
+  checkBack(event:Event,i:number,box:string){
+    const find = event.target as HTMLInputElement
+    if((event as KeyboardEvent).key==='Backspace' && i>0 && find.value==''){
+      const idBox = (i-1).toString() + box
+      const focusTo = document.getElementById(idBox) as HTMLInputElement
+      focusTo.focus()
+    }
   }
 
   async onSubmit(num:number){
@@ -201,12 +105,10 @@ export class SimpleComponent {
         try
         {await this.checkWord(this.box, this.modelBoxes1)
           if(!this.invalidWord){
-            console.log('valid word')
             this.attempt1 = true;
             this.button1 = true;  
           }   
           else{
-            console.log('invalid word')
             this.modelBoxes1 = ['','','','','']
           }   
         }
@@ -225,12 +127,10 @@ export class SimpleComponent {
         try
         {await this.checkWord(this.box, this.modelBoxes2)
           if(!this.invalidWord){
-            console.log('valid word')
             this.attempt2 = true;
             this.button2 = true;  
           }   
           else{
-            console.log('invalid word')
             this.modelBoxes2 = ['','','','','']
           }   
         }
@@ -246,12 +146,10 @@ export class SimpleComponent {
         try
         {await this.checkWord(this.box, this.modelBoxes3)
           if(!this.invalidWord){
-            console.log('valid word')
             this.attempt3 = true;
             this.button3 = true;  
           }   
           else{
-            console.log('invalid word')
             this.modelBoxes3 = ['','','','','']
           }   
         }
@@ -267,12 +165,10 @@ export class SimpleComponent {
         try
         {await this.checkWord(this.box, this.modelBoxes4)
           if(!this.invalidWord){
-            console.log('valid word')
             this.attempt4 = true;
             this.button4 = true;  
           }   
           else{
-            console.log('invalid word')
             this.modelBoxes4 = ['','','','','']
           }   
         }
@@ -281,6 +177,7 @@ export class SimpleComponent {
         }
         break;
       case 5:
+        console.log(this.chosenWord)
         this.wordArray = [...this.chosenWord]
         this.newArray=[]
         this.finalWord=''
@@ -288,16 +185,18 @@ export class SimpleComponent {
         try
         {await this.checkWord(this.box, this.modelBoxes5)
           if(!this.invalidWord){
-            console.log('valid word')
             this.button5 = true;  
           }   
           else{
-            console.log('invalid word')
             this.modelBoxes5 = ['','','','','']
           }   
         }
         catch(error){
           console.log(error)
+        }
+        this.submitted = true;
+        if(this.finalWord!=this.chosenWord){
+          console.log('failed:', this.failed,'completed: ', this.completed)
         }
         break;
     }
@@ -308,7 +207,6 @@ export class SimpleComponent {
     this.finalWord = modelboxes.join('').toLowerCase()
     try{
       await this.checkIfValid(this.finalWord)
-      console.log(this.invalidWord,'first time')
     }
     catch(error:any){
       if (error.status === 404){
@@ -319,7 +217,6 @@ export class SimpleComponent {
     if(this.invalidWord){
       modelboxes = ['','','','','']
       this.newArray = []
-      console.log(this.newArray)
       alert('according to this weird dictionary im using this word does not exist')
       return
     }
@@ -357,7 +254,6 @@ export class SimpleComponent {
     const wrongBox = event.target as HTMLInputElement
     if(this.wrongLetters.includes(letter) && !this.finalArray.includes(letter)){
       wrongBox.style.color = 'grey';
-      console.log(this.wordArray)
     }
     else{
       wrongBox.style.color = 'black'
@@ -368,12 +264,10 @@ export class SimpleComponent {
     try{
       await this.http.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`).toPromise()
         this.invalidWord = false
-        console.log('valid wordcoming from checkIfValid function')
     }
     catch(error:any){
       this.invalidWord = true
       if(error.status===404){
-        console.log('here is an error from function!')
       }
     }  
   }
