@@ -1,8 +1,23 @@
-<div>
-    {{checkValidity}}
-    <input
-    [(ngModel)] = inputWord
-    type="text"
-    >
-    <button (click)="onClick(inputWord)">Check Word</button>
+<div class="main-container mt-5 ms-5 text-center">
+    <h1 class="mb-3">Enter a 5-letter word to be submitted</h1>
+    <div>
+        <label for="word" class="me-3">Enter a word: </label>
+        <div>
+            <input #Word="ngModel" ngModel required name="word" [(ngModel)]="userWord" type="text" maxlength="5" class="mb-3">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="name" class="me-1 text-italic" style="font-style: italic;">Special challenge - optional (e.g. Spanish, Medical etc.): </label>
+        <div><input required type="text" name="title" [(ngModel)]="title"></div>
+    </div>
+
+    <div class="mb-3 ms-1">
+        <label for="name" class="me-1">Submitted by: </label>
+        <div><input required type="text" name="name" [(ngModel)]="userName"></div>
+    </div>
+
+    <button (click)="onClick(userWord)">Submit</button>
 </div>
+  
+  

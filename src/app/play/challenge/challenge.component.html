@@ -1,0 +1,21 @@
+
+<div class="mt-5 d-flex flex-column align-items-center">
+    <h2 class="text-center">Select a Challenge!</h2>
+    <div class="mt-3">
+        <label for="Select option" class="me-3">Select one of the following challenges: </label>
+        <select [(ngModel)]="choice">
+            <option disabled selected>Challenges:</option>
+            <option [disabled]="gameStarted" *ngFor="let each of data" [ngValue]="each">
+                <span>{{each.name}}</span> 
+                <span>&nbsp;{{each.createdAt.toMillis() | date}}</span>
+                <span class="fStyle">&nbsp;{{each.title}}</span>
+            </option>
+        </select>
+    </div>
+    <div class="ms-auto me-auto mt-5">
+        <button (click)="onClick()" [disabled]="gameStarted">Let's play!</button>
+    </div>
+</div>
+
+
+<app-simple *ngIf="gameStarted" [parentWord]="choice?.word"></app-simple>

@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CreateComponent } from './admin/create/create.component';
 import { HomeComponent } from './home/home.component';
 import { SimpleComponent } from './play/simple/simple.component';
+import { ChallengeComponent } from './play/challenge/challenge.component';
 
 // import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 // import { environment } from '../environments/environment';
@@ -25,7 +26,8 @@ import { SimpleComponent } from './play/simple/simple.component';
     NavbarComponent,
     CreateComponent,
     HomeComponent,
-    SimpleComponent
+    SimpleComponent,
+    ChallengeComponent
   ],
   imports: [
     BrowserModule,

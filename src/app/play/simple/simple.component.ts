@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { fiveLetterWords } from 'src/assets/words';
 
 @Component({
@@ -9,6 +9,7 @@ import { fiveLetterWords } from 'src/assets/words';
 })
 export class SimpleComponent {
 
+  @Input() parentWord: string | undefined
   fiveLetterWords = fiveLetterWords
   
   chosenWord: string =  '';
@@ -52,7 +53,13 @@ export class SimpleComponent {
   ngOnInit(): void{
 
     const randomWord=Math.floor(Math.random() * this.fiveLetterWords.length);
-    this.chosenWord = this.fiveLetterWords[randomWord]
+    //this.chosenWord = this.fiveLetterWords[randomWord]
+    if(this.parentWord){
+      this.chosenWord = this.parentWord;
+    }
+    else{
+      this.chosenWord = this.fiveLetterWords[randomWord]
+    }
     this.finalArray = [...this.chosenWord]
   }
 

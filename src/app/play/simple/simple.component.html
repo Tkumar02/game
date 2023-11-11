@@ -1,5 +1,14 @@
-<div>
-    <div class="grid-container" *ngIf="!completed" style="display:flex; margin-left: 10px">
+    
+<div class="container d-flex flex-column align-items-center">
+
+    <div>
+        <h1 class="text-center" 
+        *ngIf="!completed && failed  && submitted">
+        Hidden word is "{{chosenWord.toUpperCase()}}" Better luck next time! Return to the main screen to choose another game
+        </h1>
+    </div>
+
+    <div class="grid-container" *ngIf="!completed">
         <div *ngFor="let num of [0,1,2,3,4]; let i=index">
             <input maxlength="1" name="modelBox"
             [id]='i +"one"' 
@@ -61,11 +70,12 @@
         </div>
         <button [disabled]="button5||!check" (click)="onSubmit(5)">Submit</button>
     </div>
-    
+
 </div>
+
 
 <h1 *ngIf="completed">
     Congratulations!! RETURN TO MAIN SCREEN TO CHOOSE ANOTHER GAME
 </h1>
 
-<h1 *ngIf="!completed && failed  && submitted">Hidden word is {{chosenWord}} Better luck next time! Return to the main screen to choose another game</h1>
+

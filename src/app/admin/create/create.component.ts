@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { CheckWordService } from 'src/app/services/check-word.service';
+import { Challenge } from 'src/app/models/challenge';
 
 @Component({
   selector: 'app-create',
@@ -7,10 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent {
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private checkWord: CheckWordService){}
 
-  checkValidity: boolean = false
-  inputWord: string = ''
+  checkValidity: boolean = false;
+  userWord: string = '';
+  userName: string = '';
+  title: string = '';
+  submitData: Challenge | undefined;
 
   ngOnInit(): void{  }
 
@@ -18,24 +23,31 @@ export class CreateComponent {
     console.log(this.checkValidity, 'initial', word)
     try{
       await this.checkWord1(word)
-      this.checkValidity = true
-      console.log(this.checkValidity, 'in await function')
       if(this.checkValidity){
-        console.log('Yes', word)
       }
     }
     catch (error:any){
-      this.checkValidity = false
-      console.log('word doesnot exist', this.checkValidity)
+      alert('please enter a valid word')
+      this.userWord = ''
     }
-    console.log(this.checkValidity, 'after function has run', word)
+    if(this.checkValidity && this.userName && this.userWord){
+      this.submitData = {name: this.userName, word: this.userWord, title:this.title, createdAt: new Date()}
+      this.checkWord.sendWord(this.submitData)
+      alert('Your word has been successfully submitted!')
+    }
+    else{
+      alert('there has been an error, please check all the fields')
+    }
+    this.userName = ''
+    this.userWord = ''
+    this.title = ''
+    this.submitData = {name: '', createdAt:new Date(), title:'', word:''}
   }
 
   async checkWord1(word:string): Promise<any>{ 
-     const rObject = await this.http.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    const rObject = await this.http.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
     .toPromise()
     try {
-      //console.log('coming from checkIfValid function',data)
       this.checkValidity = true
     }
     catch (error:any) {
