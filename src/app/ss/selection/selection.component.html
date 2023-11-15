@@ -1,0 +1,53 @@
+<div *ngIf="!hide" class="main-container d-flex flex-column align-items-center">
+    <h2 class="mt-3 mb-3">Welcome to Secret Santa</h2>
+    <h3>Select a group from the list below: </h3>
+    <div>
+        <label for="group" class="me-3">Select group: </label>
+        <select name="group" id="group" [(ngModel)]="selectedGroup">
+            <option selected disabled>Groups:</option>
+            <option *ngFor="let group of membersGroup" value="selectedGroup" [ngValue]="group">
+                {{group.data.groupName}}
+            </option>
+        </select>
+    </div>
+    <div>
+        <div>Enter Password: </div>
+        <input [(ngModel)]="password" type="text">
+    </div>
+    <button class="mt-3 mb-3" (click)="getAllMembers(selectedGroup.data.groupName)">Confirm Group Name</button>
+    <div *ngIf="confirmedGroup">
+        <button (click)="getNames()">See members in {{selectedGroup.data.groupName}} group</button>
+    </div>
+
+    <div class="mt-3 d-flex flex-column align-items-center" *ngIf="seeMembers">
+        <h4>Select your name from the list below: </h4>
+        <div>
+            <select name="memberChoice" [(ngModel)]="member">
+                <option value="" disabled selected>---------------</option>
+                <option *ngFor="let name of newMembers">{{name}}</option>
+            </select>
+        </div>
+        <div *ngIf="member" class="mt-3 d-flex flex-column align-items-center">
+            <h4>Please confirm you want to see secret santa for 
+                <span style="color:red;">{{member.toUpperCase()}}</span></h4>
+            <button (click)="getSS(member)">Yes, I want to see secret santa for {{member.toUpperCase()}}</button>
+        </div>
+    </div>
+</div>
+
+<h1 class="text-center mt-5" *ngIf="ssReveal">
+    Your secret santa is: {{sSanta}}
+</h1>
+
+<div>
+    <button (click)="seeAllPairings()">CLICK HERE TO SEE FINAL PAIRINGS</button>
+    <table class="table ms-5">
+        <th>person</th>
+        <th>secret santa</th>
+        <tr  *ngFor="let obj of finalPairings">
+            <td>{{obj.member}}</td>
+            <td class="ms-3">{{obj.secretSanta}}</td>
+        </tr>
+    </table>
+</div>
+

@@ -1,0 +1,33 @@
+<div class="main-container">
+    <h1 class="text-center"> Create your Secret Santa Group!</h1>
+    <form #groupForm="ngForm" (ngSubmit)="submitForm(groupForm.value)" class="d-flex flex-column align-items-center">
+        
+        <input type="text" name="groupName" placeholder="Enter Group name" ngModel [(ngModel)]="groupName">
+        <h5 class="mt-3">Enter a password below that members will use to access this group</h5>
+        <input class="mb-3" type="text" name="password" placeholder = 'Password' ngModel>
+        <h5 class="mt-3">Enter total number of people within Group</h5>
+        <input type="number" 
+        name="numero" 
+        placeholder="Enter number of members in group" 
+        ngModel 
+        [(ngModel)]="members">
+
+        <button [disabled]="confirmed" (click)="generateArray()">Confirm</button>
+
+        <div *ngIf="!hide">
+            <div *ngFor="let i of memberArray; let j=index">
+                <div>{{j+1}}</div>
+                <input type="text" 
+                placeholder="Enter member name" 
+                name="member{{j+1}}" 
+                ngModel
+                [(ngModel)]="namesArray[j]">
+                <span>Exclude pairing with: </span>
+                <input type="Enter member name" name="!member{{j+1}}" ngModel>
+            </div>
+        </div>
+
+        <button class="mt-3 mb-3" (click)="resetForm(groupForm)">Reset</button>
+        <button class="mt-3" [disabled]="submitDisabled" (click)="onSubmit(groupForm)">Submit</button>
+    </form>
+</div>

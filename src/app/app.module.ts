@@ -15,6 +15,8 @@ import { CreateComponent } from './admin/create/create.component';
 import { HomeComponent } from './home/home.component';
 import { SimpleComponent } from './play/simple/simple.component';
 import { ChallengeComponent } from './play/challenge/challenge.component';
+import { CreateGroupComponent } from './ss/create-group/create-group.component';
+import { SelectionComponent } from './ss/selection/selection.component';
 
 // import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 // import { environment } from '../environments/environment';
@@ -27,7 +29,9 @@ import { ChallengeComponent } from './play/challenge/challenge.component';
     CreateComponent,
     HomeComponent,
     SimpleComponent,
-    ChallengeComponent
+    ChallengeComponent,
+    CreateGroupComponent,
+    SelectionComponent
   ],
   imports: [
     BrowserModule,

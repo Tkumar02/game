@@ -1,0 +1,10 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    margin-bottom: 3px;
+    margin-top: 3px;
+    min-width: 20vw;
+}
