@@ -39,15 +39,5 @@
     Your secret santa is: {{sSanta}}
 </h1>
 
-<div>
-    <button (click)="seeAllPairings()">CLICK HERE TO SEE FINAL PAIRINGS</button>
-    <table class="table ms-5">
-        <th>person</th>
-        <th>secret santa</th>
-        <tr  *ngFor="let obj of finalPairings">
-            <td>{{obj.member}}</td>
-            <td class="ms-3">{{obj.secretSanta}}</td>
-        </tr>
-    </table>
-</div>
+
 

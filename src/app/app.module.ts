@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat/';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { HttpClientModule } from '@angular/common/http'
 
@@ -17,6 +18,8 @@ import { SimpleComponent } from './play/simple/simple.component';
 import { ChallengeComponent } from './play/challenge/challenge.component';
 import { CreateGroupComponent } from './ss/create-group/create-group.component';
 import { SelectionComponent } from './ss/selection/selection.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ViewDataComponent } from './admin/view-data/view-data.component';
 
 // import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 // import { environment } from '../environments/environment';
@@ -31,7 +34,9 @@ import { SelectionComponent } from './ss/selection/selection.component';
     SimpleComponent,
     ChallengeComponent,
     CreateGroupComponent,
-    SelectionComponent
+    SelectionComponent,
+    LoginComponent,
+    ViewDataComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,8 @@ import { SelectionComponent } from './ss/selection/selection.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     //provideFirebaseApp(() => initializeApp(environment.firebase)), provideFirestore(() => getFirestore()),
-    HttpClientModule
+    HttpClientModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

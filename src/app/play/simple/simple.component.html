@@ -53,7 +53,7 @@
             [(ngModel)]="modelBoxes4[i]"
             required
             (input)="onInput(i,4)"
-            (input)="checkLetter(modelBoxes4[i],$event)"
+            (keyup)="checkLetter(modelBoxes4[i],$event)"
             (keydown)="checkBack($event,i,'four')">
         </div>
         <button [disabled]="button4 || !check" (click)="onSubmit(4)">Submit</button>

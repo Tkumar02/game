@@ -1,9 +1,18 @@
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"> -->
+
 <nav class="navbar navbar-expand-lg gradient-background">
     <a class="navbar-brand yellow-text" href="/">Word Challenge</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+   
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+
+    <!-- <button class="navbar-toggler" style="color:gold" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="color: gold;"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav"> -->
       <ul class="navbar-nav">
         <li class="nav-item active">
           <a class="nav-link grey-text" routerLink="home">Home</a>
@@ -12,16 +21,24 @@
           <a class="nav-link grey-text" routerLink="/admin/create">Create Challenge</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link grey-text" href="/play/challenge">Choose Challenge</a>
+          <a class="nav-link grey-text" routerLink="/play/challenge">Choose Challenge</a>
         </li>
-    </ul>
-    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link grey-text" routerLink="/view-data">Admin</a>
+        </li>
+      </ul>
+    <ul *ngIf="!this.hideLogin" class="navbar-nav ms-auto">
         <li class="nav-item me-0">
           <a class="nav-link disabled text-white" href="#">Sign up</a>
         </li>
         <li class="nav-item me-0">
-            <a class="nav-link disabled text-white" href="#">Log in</a>
-          </li>
-      </ul>
-    </div>
+            <a class="nav-link text-white" routerLink="login">Log in</a>
+        </li>
+    </ul>
+    
+    <ul *ngIf="hideLogin" class="d-flex flex-column ms-auto me-2 align-items-center">
+      <ul class="text-white mb-1">Member {{userEmail}}</ul>
+      <button class="btn btn-secondary" (click)="onLogOut()">Log Out</button>
+    </ul>
+  </div>
   </nav>

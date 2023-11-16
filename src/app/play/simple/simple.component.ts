@@ -260,10 +260,10 @@ export class SimpleComponent {
   checkLetter(letter:string, event:Event){
     const wrongBox = event.target as HTMLInputElement
     if(this.wrongLetters.includes(letter) && !this.finalArray.includes(letter)){
-      wrongBox.style.color = 'grey';
+      wrongBox.style.backgroundColor = 'grey';
     }
     else{
-      wrongBox.style.color = 'black'
+      wrongBox.style.backgroundColor = 'white';
     }
   }
 

@@ -1,0 +1,26 @@
+<div class="top d-flex flex-column align-items-center mt-5">
+    <h3>Select a group from below</h3>
+    <div class="main mt-2 mb-3">
+        <select name="groupOptions" id="groupOtions" [(ngModel)]="group">
+            <option disabled selected value="null">--------</option>
+            <option *ngFor="let groupChoice of groups"   [ngValue]="groupChoice.id">
+                {{groupChoice.data.groupName}}
+            </option>
+        </select>
+    </div>
+
+    <div *ngIf="group">
+        <button (click)="seeAllPairings()">CLICK HERE TO SEE FINAL PAIRINGS</button>
+        <table *ngIf="selected" class="table ms-5 mt-3">
+            <th>person</th>
+            <th>secret santa</th>
+            <tr  *ngFor="let obj of pairings">
+                <td>{{obj.member}}</td>
+                <td class="ms-3">{{obj.secretSanta}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+

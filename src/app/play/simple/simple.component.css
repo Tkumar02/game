@@ -1,13 +1,13 @@
 .grid-container {
     gap: 1px;
-    width: 400px;
-    margin-left: auto;
+    width: 90vw;
+    margin: auto;
     display: flex;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 
 input{
-    width: 5vw;
+    width: 15vw;
     height: 9vh;
     text-align: center;
     font-size: 7vh;
